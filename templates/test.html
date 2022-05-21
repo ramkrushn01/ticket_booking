@@ -1,0 +1,113 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <form action="test" method="post">
+        <h3>sign-up</h3>
+        {% csrf_token %}
+        <label for="name">Enter Your Name Here:</label>
+        <input type="text" class="box" name="name" id="name" placeholder="Enter Your Name Here" autofocus required
+            value="ramkrushn">
+        <label for="username">Enter Your Email Here:</label>
+        <input type="email" name="username" class="box" id="username" placeholder="Enter Your Email Here" required
+            value="ramkrushnsalunkhe99@gmail.com">
+        <label for="password">Enter Your Password Here:</label>
+        <input type="password" name="password" class="box" id="password" placeholder="Enter Your Password" required
+            value="ramkrushn">
+        <label for="re-enter">Re-Enter Your Password</label>
+        <input type="password" name="re-password" id="rePassword" class="box" placeholder="Re-Enter Your Password"
+            onkeyup="checkPassword()" required value="ramkrushn">
+        <p id="wPass">Incorrect Password!</p>
+        <input type="submit" class="btn-primary btn" style="text-align: center;" id="smtBtn" value="Send OTP" readonly>
+    </form>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form action="test" method="POST" id="login-form">
+        {% csrf_token %}
+        <input type="text" name="name" id="name" value="ramkrushn"><br><br>
+        <input type="email" name="email" id="email" value="ramkrushnsalunkhe99@gmail.com"><br><br>
+        <input type="password" name="password" id="password" value="rampass"><br><br>
+        <button type="submit">submit</button>
+        <br><br><br><br>
+        {{rest}}
+
+
+    </form>
+</body>
+
+<script>
+
+    function httpRequest(formid) {
+        var returnJson;
+        let formname = document.getElementsByTagName('form')[formid];
+        let formchild = formname.children;
+        let sendData = Object.create(null);
+        let formDestination = formname.action;
+
+        for (let i = 0; i < formchild.length; i++) {
+            let itemsOfformChild = formchild[i];
+            if (itemsOfformChild.tagName == 'INPUT') {
+                sendData[itemsOfformChild.name] = itemsOfformChild.value;
+            }
+        }
+
+
+        let allDataSend = { method: formname.method, headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Cookie': document.cookie }, body: JSON.stringify(sendData), };
+
+        httpR = new XMLHttpRequest();
+        httpR.open(formname.method, formDestination, true);
+
+        httpR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        console.table(httpR)
+
+        httpR.onreadystatechange = () => {
+            console.log(httpR.readyState);
+        }
+
+        let bodyContent = "", urlEncodeDataPairs = [], name;
+        for (name in sendData) {
+            urlEncodeDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(sendData[name]));
+        }
+        console.log(bodyContent);
+
+        responseFromServer = httpR.send();
+        console.table(responseFromServer);
+
+
+        // fetch(formDestination, allDataSend).then(res => {
+        //     returnJson = res.json();
+        // })
+        // .catch(err1 => { console.log(err1) })
+        return returnJson;
+
+    }
+
+    // resp = httpRequest('login-form')
+    // console.table(resp)
+</script>
+
+</html>
