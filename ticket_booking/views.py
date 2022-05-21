@@ -11,8 +11,8 @@ import json
 import email.message
 
 componyInfo = {
-    'username':'salunkhe9307@gmail.com',
-    'password':'9307675522'
+    'username':'Enter Your Gmail Here',
+    'password':'Enter Your Gmail Password Here'
 }
 
 # Create your views here.
